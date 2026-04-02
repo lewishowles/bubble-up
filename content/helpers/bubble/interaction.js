@@ -77,6 +77,7 @@ export async function selectPopoverOption(triggerSelector, optionSelector) {
 		return;
 	}
 
+	// Bubble popovers require pointer events; click() is insufficient.
 	const pointerDown = new PointerEvent("pointerdown", {
 		bubbles: true,
 		pointerType: "mouse",

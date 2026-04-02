@@ -39,11 +39,17 @@ const uiSchema = [
 ];
 
 /**
+ * Reset Bubble Up UI artifacts if they already exist.
+ */
+function resetUI() {
+	removeExistingElement("#bubble-up-styles");
+	removeExistingElement("#bubble-up-ui");
+}
+
+/**
  * Inject Bubble Up styles into the document head.
  */
 function injectStyles() {
-	removeExistingElement("#bubble-up-styles");
-
 	const style = document.createElement("style");
 
 	style.id = "bubble-up-styles";
@@ -133,6 +139,7 @@ function attachEvents(schema) {
 			continue;
 		}
 
+		// node.children is only expected on "group" nodes
 		if (node.type === "group") {
 			attachEvents(node.children);
 		}
@@ -146,8 +153,6 @@ function attachEvents(schema) {
  *     The UI schema.
  */
 function mountUI(schema) {
-	removeExistingElement("#bubble-up-ui");
-
 	const wrapper = document.createElement("div");
 
 	wrapper.id = "bubble-up-ui";
@@ -170,6 +175,9 @@ function mountUI(schema) {
  * Initialise the Bubble Up UI.
  */
 export function initialiseUI() {
+	resetUI();
+
 	injectStyles();
+
 	mountUI(uiSchema);
 }
