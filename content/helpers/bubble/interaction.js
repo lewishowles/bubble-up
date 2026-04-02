@@ -97,4 +97,7 @@ export async function selectPopoverOption(triggerSelector, optionSelector) {
 	await waitForElement(optionSelector);
 
 	clickElement(optionSelector);
+
+	trigger.dispatchEvent(pointerDown);
+	trigger.dispatchEvent(pointerUp);
 }
