@@ -1,7 +1,6 @@
-import { clickElement } from "../helpers/dom/events.js";
-import { openSection } from "../helpers/bubble/interaction.js";
+import { clickElement } from "../helpers/dom/interaction.js";
+import { openSection, setInputValue } from "../helpers/bubble/interaction.js";
 import { sections, elements } from "../helpers/bubble/selectors.js";
-import { setInputValue } from "../helpers/bubble/interaction.js";
 import { waitForElement } from "../helpers/utilities/wait.js";
 
 /**
@@ -15,7 +14,7 @@ export async function applyRowLayout() {
 
 	await waitForElement(elements.layout.inputColumnGap);
 
-	setInputValue(elements.layout.inputColumnGap, "8", "0");
+	setInputValue(elements.layout.inputColumnGap, "8", { currentValue: "0" });
 }
 
 /**
@@ -29,5 +28,5 @@ export async function applyColumnLayout() {
 
 	await waitForElement(elements.layout.inputRowGap);
 
-	setInputValue(elements.layout.inputRowGap, "8", "0");
+	setInputValue(elements.layout.inputRowGap, "8", { currentValue: "0" });
 }

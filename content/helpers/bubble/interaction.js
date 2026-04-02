@@ -1,7 +1,7 @@
+import { clickElement } from "../dom/interaction.js";
 import { getElement } from "../dom/query.js";
-import { clickElement } from "../dom/events.js";
-import { waitForElement } from "../utilities/wait.js";
 import { showError } from "../utilities/log.js";
+import { waitForElement } from "../utilities/wait.js";
 
 /**
  * Open a section of the Bubble property editor, if necessary.
@@ -40,10 +40,11 @@ export function openSection(selector) {
  *     The selector of the input to modify.
  * @param  {string}  value
  *     The value to set.
- * @param  {string}  valuePrerequisite
+ * @param  {object}  options
+ * @param  {string}  currentValue
  *     The value that must be the current value before a value is set.
  */
-export function setInputValue(selector, value, valuePrerequisite) {
+export function setInputValue(selector, value, { currentValue } = {}) {
 	const input = getElement(selector);
 
 	if (!input) {
@@ -52,7 +53,7 @@ export function setInputValue(selector, value, valuePrerequisite) {
 		return;
 	}
 
-	if (valuePrerequisite && input.value !== valuePrerequisite) {
+	if (currentValue && input.value !== currentValue) {
 		return;
 	}
 
