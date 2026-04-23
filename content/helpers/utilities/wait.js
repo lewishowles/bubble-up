@@ -1,3 +1,5 @@
+import { showWarning } from "./log.js";
+
 /**
  * Wait for an element to exist in the DOM.
  *
@@ -16,6 +18,10 @@ export function waitForElement(selector) {
 			return;
 		}
 
+		const timeoutId = setTimeout(() => {
+			showWarning(`waitForElement("${selector}") — still waiting after 5s, selector may have changed.`);
+		}, 5000);
+
 		const observer = new MutationObserver(() => {
 			const foundElement = document.querySelector(selector);
 
@@ -23,6 +29,7 @@ export function waitForElement(selector) {
 				return;
 			}
 
+			clearTimeout(timeoutId);
 			observer.disconnect();
 
 			resolve(foundElement);

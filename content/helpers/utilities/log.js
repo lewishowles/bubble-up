@@ -6,7 +6,7 @@
  * @param  {string}  message
  *     The message to display.
  */
-function showMessage(type, message) {
+function showLog(type, message) {
 	console[type](`🫧 [bubble-up]: ${message}`);
 }
 
@@ -16,8 +16,18 @@ function showMessage(type, message) {
  * @param  {string}  message
  *     The message to display.
  */
+export function showMessage(message) {
+	showLog("log", message);
+}
+
+/**
+ * Show an error message.
+ *
+ * @param  {string}  message
+ *     The message to display.
+ */
 export function showError(message) {
-	showMessage("error", message);
+	showLog("error", message);
 }
 
 /**
@@ -27,5 +37,5 @@ export function showError(message) {
  *     The message to display.
  */
 export function showWarning(message) {
-	showMessage("warn", message);
+	showLog("warn", message);
 }

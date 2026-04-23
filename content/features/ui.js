@@ -1,6 +1,7 @@
 import { applyRowLayout, applyColumnLayout } from "./layout.js";
 import { removeExistingElement } from "../helpers/dom/query.js";
 import { removeMinimumSizes } from "./sizing.js";
+import { showError } from "../helpers/utilities/log.js";
 
 /**
  * Declarative schema describing the Bubble Up UI.
@@ -158,9 +159,11 @@ function mountUI(schema) {
 	wrapper.id = "bubble-up-ui";
 	wrapper.innerHTML = schema.map(renderNode).join("");
 
-	const componentLibraryButton = document.querySelector("[aria-label=\"Component Library\"]");
+	const componentLibraryButton = document.querySelector("#menubar-zoom-dropdown-btn");
 
 	if (!componentLibraryButton) {
+		showError("Could not find element with selector \"#menubar-zoom-dropdown-btn\". The toolbar selector may have changed.");
+
 		return;
 	}
 
