@@ -6,8 +6,6 @@ It exists purely to improve day-to-day productivity when working inside the Bubb
 
 This extension is **not published** to any browser store and is intended for **personal, local use**.
 
----
-
 ## What it does
 
 Bubble Up currently adds a small UI to the Bubble editor that allows you to:
@@ -15,8 +13,6 @@ Bubble Up currently adds a small UI to the Bubble editor that allows you to:
 - Quickly switch selected groups between **Row** and **Column** layouts
 - Apply a sensible default gap when converting layouts (without overwriting existing values)
 - Remove default **minimum width / height** values that Bubble applies to certain elements (e.g. buttons)
-
----
 
 ## Installation
 
@@ -33,8 +29,6 @@ Bubble Up currently adds a small UI to the Bubble editor that allows you to:
 5. Select the **root folder of this project** (the folder containing `manifest.json`).
 
 6. Open (or refresh) a Bubble editor page matching `https://bubble.io/page?*`.
-
----
 
 ### Firefox
 
@@ -75,8 +69,6 @@ Firefox requires extensions to be signed before they can be installed persistent
 
 5. Open (or refresh) a Bubble editor page matching `https://bubble.io/page?*`.
 
----
-
 ## Updating the extension
 
 ### Chrome
@@ -86,8 +78,6 @@ Firefox requires extensions to be signed before they can be installed persistent
 3. Refresh the Bubble editor page.
 
 If you change `manifest.json`, remove and re-add the extension to be safe.
-
----
 
 ### Firefox
 
@@ -109,8 +99,6 @@ bun run firefox:sign
 
 Then reinstall the new `.xpi` from `web-ext-artifacts/` via **Install Add-on From File...** in `about:addons`.
 
----
-
 ## Available scripts
 
 | Script | Description |
@@ -118,8 +106,6 @@ Then reinstall the new `.xpi` from `web-ext-artifacts/` via **Install Add-on Fro
 | `bun run firefox:run` | Launch Firefox with the extension loaded temporarily (auto-reloads on file changes) |
 | `bun run firefox:sign` | Sign the extension via AMO unlisted signing, producing a persistent `.xpi` |
 | `bun run firefox:build` | Build a plain `.zip` of the extension without signing |
-
----
 
 ## Disclaimer
 
