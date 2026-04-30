@@ -90,61 +90,43 @@ function injectStyles() {
 }
 
 /**
- * Render a single UI schema node.
+ * Render a single UI schema node into a DOM element.
  *
  * @param  {object}  node
  *     A schema node.
  *
- * @returns {string}
+ * @returns {HTMLElement|null}
  */
 function renderNode(node) {
 	if (node.type === "button") {
-		return `
-			<button id="bubble-up-button-${node.id}" class="bubble-up-button">
-				${node.label}
-			</button>
-		`;
+		const button = document.createElement("button");
+
+		button.id = `bubble-up-button-${node.id}`;
+		button.className = "bubble-up-button";
+		button.textContent = node.label;
+		button.addEventListener("click", node.onClick);
+
+		return button;
 	}
 
 	if (node.type === "group") {
-		return `
-			<dl class="bubble-up-group">
-				<dt>${node.label}</dt>
-				<dd class="bubble-up-group__children">
-					${node.children.map(renderNode).join("")}
-				</dd>
-			</dl>
-		`;
+		const dl = document.createElement("dl");
+		const dt = document.createElement("dt");
+		const dd = document.createElement("dd");
+
+		dl.className = "bubble-up-group";
+		dt.textContent = node.label;
+		dd.className = "bubble-up-group__children";
+
+		node.children.map(renderNode).forEach(child => dd.appendChild(child));
+
+		dl.appendChild(dt);
+		dl.appendChild(dd);
+
+		return dl;
 	}
 
-	return "";
-}
-
-/**
- * Attach click handlers defined in the schema.
- *
- * @param  {array}  schema
- *     The UI schema.
- */
-function attachEvents(schema) {
-	for (const node of schema) {
-		if (node.type === "button") {
-			const button = document.getElementById(
-				`bubble-up-button-${node.id}`
-			);
-
-			if (button) {
-				button.addEventListener("click", node.onClick);
-			}
-
-			continue;
-		}
-
-		// node.children is only expected on "group" nodes
-		if (node.type === "group") {
-			attachEvents(node.children);
-		}
-	}
+	return null;
 }
 
 /**
@@ -157,7 +139,8 @@ function mountUI(schema) {
 	const wrapper = document.createElement("div");
 
 	wrapper.id = "bubble-up-ui";
-	wrapper.innerHTML = schema.map(renderNode).join("");
+
+	schema.map(renderNode).filter(Boolean).forEach(node => wrapper.appendChild(node));
 
 	const componentLibraryButton = document.querySelector("#menubar-zoom-dropdown-btn");
 
@@ -170,8 +153,6 @@ function mountUI(schema) {
 	componentLibraryButton
 		.parentElement
 		.insertAdjacentElement("afterend", wrapper);
-
-	attachEvents(schema);
 }
 
 /**
