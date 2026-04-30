@@ -4,6 +4,14 @@
 	"description": "Simplify some of the repetitive workflows in the Bubble.io editor.",
 	"version": "0.1.0",
 
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "bubble-up@howles.dev",
+			"strict_min_version": "109.0",
+			}
+		}
+	},
+
 	"content_scripts": [
 		{
 			"matches": ["https://bubble.io/page?*"],
@@ -16,7 +24,15 @@
 		{
 			"resources": [
 				"content/app.js",
-				"content/**/*.js"
+				"content/features/layout.js",
+				"content/features/sizing.js",
+				"content/features/ui.js",
+				"content/helpers/bubble/interaction.js",
+				"content/helpers/bubble/selectors.js",
+				"content/helpers/dom/interaction.js",
+				"content/helpers/dom/query.js",
+				"content/helpers/utilities/log.js",
+				"content/helpers/utilities/wait.js"
 			],
 			"matches": [
 				"https://bubble.io/*"
